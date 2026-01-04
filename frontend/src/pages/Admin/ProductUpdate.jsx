@@ -140,11 +140,11 @@ const AdminProductUpdate = () => {
             <div className="h-12">Update / Delete Product</div>
 
             {image && (
-              <div className="text-center">
+              <div className="flex justify-start">
                 <img
                   src={image}
                   alt="product"
-                  className="block mx-auto w-full h-[40%]"
+                  className="block  w-[40%] h-[40%]"
                 />
               </div>
             )}
