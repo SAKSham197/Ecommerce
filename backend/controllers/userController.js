@@ -3,7 +3,7 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createToken.js";
 
-const createUser = asyncHandler(async (req, res) => {
+const  createUser = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
   if (!username || !email || !password) {
@@ -33,33 +33,68 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
+// const loginUser = asyncHandler(async (req, res) => {
+//   const { email, password } = req.body;
+
+//   console.log(email);
+//   console.log(password);
+
+//   const existingUser = await User.findOne({ email });
+
+//   if (existingUser) {
+//     const isPasswordValid = await bcrypt.compare(
+//       password,
+//       existingUser.password
+//     );
+
+//     if (isPasswordValid) {
+//       createToken(res, existingUser._id);
+
+//       res.status(201).json({
+//         _id: existingUser._id,
+//         username: existingUser.username,
+//         email: existingUser.email,
+//         isAdmin: existingUser.isAdmin,
+//       });
+//       return;
+//     }
+//   }
+// });
+
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  console.log(email);
-  console.log(password);
-
   const existingUser = await User.findOne({ email });
 
-  if (existingUser) {
-    const isPasswordValid = await bcrypt.compare(
-      password,
-      existingUser.password
-    );
-
-    if (isPasswordValid) {
-      createToken(res, existingUser._id);
-
-      res.status(201).json({
-        _id: existingUser._id,
-        username: existingUser.username,
-        email: existingUser.email,
-        isAdmin: existingUser.isAdmin,
-      });
-      return;
-    }
+  // ❌ User not found
+  if (!existingUser) {
+    res.status(401);
+    throw new Error("Invalid email or password");
   }
+
+  const isPasswordValid = await bcrypt.compare(
+    password,
+    existingUser.password
+  );
+
+  // ❌ Password mismatch
+  if (!isPasswordValid) {
+    res.status(401);
+    throw new Error("Invalid email or password");
+  }
+
+  // ✅ Success
+  createToken(res, existingUser._id);
+
+  res.status(200).json({
+    _id: existingUser._id,
+    username: existingUser.username,
+    email: existingUser.email,
+    isAdmin: existingUser.isAdmin,
+  });
 });
+
 
 const logoutCurrentUser = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
