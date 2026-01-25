@@ -77,9 +77,9 @@ const ProductDetails = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Messsage variant="danger">
+        <Message variant="danger">
   {error?.data?.message || error?.error || "Something went wrong"}
-</Messsage>
+</Message>
       ) : (
         <>
           <div className="flex flex-wrap relative items-between mt-[2rem] ml-[10rem]">
