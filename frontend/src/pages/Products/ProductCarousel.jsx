@@ -53,7 +53,7 @@ const ProductCarousel = () => {
             }) => (
               <div key={_id}>
                 <img
-  src={image}
+  src={`${import.meta.env.VITE_API_BASE_URL}${image.replace(/\\/g, "/")}`}
   alt={name}
   className="w-full rounded-lg object-cover h-[30rem]"
 />
