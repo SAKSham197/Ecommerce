@@ -6,7 +6,7 @@ const SmallProduct = ({ product }) => {
     <div className="w-[20rem] ml-[2rem] p-3">
       <div className="relative">
         <img
-          src={product.image}
+           src={`${import.meta.env.VITE_API_BASE_URL}${product.image.replace(/\\/g, "/")}`}
           alt={product.name}
           className="h-auto rounded"
         />

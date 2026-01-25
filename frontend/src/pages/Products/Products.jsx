@@ -84,7 +84,7 @@ const Product = () => {
           <div className="flex flex-wrap relative items-between mt-[2rem] ml-[10rem]">
             <div>
               <img
-                src={product.image}
+                 src={`${import.meta.env.VITE_API_BASE_URL}${product.image.replace(/\\/g, "/")}`}
                 alt={product.name}
                 className="w-full  xl:w-[50rem] lg:w-[45rem] md:w-[30rem] sm:w-[20rem] mr-[2rem]"
               />
