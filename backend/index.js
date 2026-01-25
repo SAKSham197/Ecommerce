@@ -24,7 +24,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://ecommerce-beta-pearl-44.vercel.app",
+    ],
+    credentials: true,
+  })
+);
+
 
 app.use("/api/users", userRoutes);
 app.use("/api/category", categoryRoutes);
