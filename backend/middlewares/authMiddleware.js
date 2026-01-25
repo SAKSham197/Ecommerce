@@ -3,10 +3,12 @@ import User from "../models/userModel.js";
 import asyncHandler from "./asyncHandler.js";
 
 const authenticate = asyncHandler(async (req, res, next) => {
-  let token;
+  let token = req.cookies?.jwt;
 
-  // Read JWT from the 'jwt' cookie
-  token = req.cookies.jwt;
+  // also allow Authorization header: "Bearer <token>"
+  if (!token && req.headers.authorization?.startsWith("Bearer")) {
+    token = req.headers.authorization.split(" ")[1];
+  }
 
   if (token) {
     try {
