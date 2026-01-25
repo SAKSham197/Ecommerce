@@ -25,7 +25,7 @@ const ProductCard = ({ p }) => {
           </span>
           <img
             className="cursor-pointer w-full"
-            src={p.image}
+            src={`${import.meta.env.VITE_API_BASE_URL}${p.image.replace(/\\/g, "/")}`}
             alt={p.name}
             style={{ height: "170px", objectFit: "cover" }}
           />
