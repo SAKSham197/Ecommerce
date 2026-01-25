@@ -26,10 +26,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://ecommerce-beta-pearl-44.vercel.app",
-    ],
+    origin: true,
     credentials: true,
   })
 );
