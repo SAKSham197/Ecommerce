@@ -54,7 +54,7 @@ const ProductDetails = () => {
       refetch();
       toast.success("Review created successfully");
     } catch (error) {
-      toast.error(error?.data || error.message);
+      toast.error(error?.data?.message || error?.message || "Something went wrong");
     }
   };
 
@@ -77,9 +77,9 @@ const ProductDetails = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        <Message variant="danger">
-          {error?.data?.message || error.message}
-        </Message>
+        <Messsage variant="danger">
+  {error?.data?.message || error?.error || "Something went wrong"}
+</Messsage>
       ) : (
         <>
           <div className="flex flex-wrap relative items-between mt-[2rem] ml-[10rem]">
