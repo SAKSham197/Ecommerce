@@ -32,10 +32,13 @@ const UserOrder = () => {
             {orders.map((order) => (
               <tr key={order._id}>
                 <img
-                  src={order.orderItems[0].image}
-                  alt={order.user}
-                  className="w-[6rem] mb-5"
-                />
+  src={`${import.meta.env.VITE_API_BASE_URL}${order.orderItems[0].image.replace(
+    /\\/g,
+    "/"
+  )}`}
+  alt={order.user}
+  className="w-[6rem] mb-5"
+/>
 
                 <td className="py-2">{order._id}</td>
                 <td className="py-2">{order.createdAt.substring(0, 10)}</td>
